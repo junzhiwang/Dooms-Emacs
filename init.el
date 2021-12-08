@@ -116,8 +116,13 @@
     :global-prefix "C-SPC")
   (rune/leader-keys
    "t" '(:ignore t :which-key "toggles")
-   "tt" '(counsel-load-theme :which-key "choose theme")))
+   "ts" '(hydra-text-scale/body :which-key "scale text") 
+   "tt" '(counsel-load-theme :which-key "choose theme")
 
+   "b" '(:ignore b :which-key "buffers")
+   "bs" '(counsel-switch-buffer :which-key "switch buffer")
+   "bk" '(kill-buffer :which-key "kill buffer")) 
+   
 (defun rune/evil-hook ()
   (dolist (mode '(custom-mode
 		  eshell-mode
@@ -138,12 +143,22 @@
   :hook (evil-mode . rune/evil-hook)
   :config
   (evil-mode 1)
+  (define-key evil-insert-state-map (kbd "C-j") 'evil-next-line)
+  (define-key evil-insert-state-map (kbd "C-k") 'evil-previous-line) 
+  (define-key evil-insert-state-map (kbd "C-h") 'evil-backward-char) 
+  (define-key evil-insert-state-map (kbd "C-l") 'evil-forward-char)
+  (define-key evil-insert-state-map (kbd "C-w") 'evil-forward-word-begin)
+  (define-key evil-insert-state-map (kbd "C-e") 'evil-forward-word-end)
+  (define-key evil-insert-state-map (kbd "C-b") 'evil-backward-word-begin)
+  (define-key evil-insert-state-map (kbd "C-d") 'evil-delete-backward-word)
+  (define-key evil-insert-state-map (kbd "C-v") 'evil-visual-char) 
+  (define-key evil-insert-state-map (kbd "C-p") 'evil-paste-after)
   (define-key evil-insert-state-map (kbd "C-g") 'evil-normal-state)
-  (define-key evil-insert-state-map (kbd "C-h") 'evil-delete-backward-char-and-join)
+  
   ;; Use visual line motions even outside of visual-line-mode buffers
   (evil-global-set-key 'motion "j" 'evil-next-visual-line)
   (evil-global-set-key 'motion "k" 'evil-previous-visual-line)
- 
+
   (evil-set-initial-state 'messages-buffer-mode 'normal)
   (evil-set-initial-state 'dashboard-mode 'normal))
 
@@ -161,9 +176,6 @@
   ("j" text-scale-increase "in")
   ("k" text-scale-decrease "out")
   ("f" nil "finished" :exit t))
-
-(rune/leader-keys
-  "ts" '(hydra-text-scale/body :which-key "scale text"))
 
 (use-package projectile
   :diminish projectile-mode
