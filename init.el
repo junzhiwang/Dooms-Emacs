@@ -121,7 +121,7 @@
 
    "b" '(:ignore b :which-key "buffers")
    "bs" '(counsel-switch-buffer :which-key "switch buffer")
-   "bk" '(kill-buffer :which-key "kill buffer")) 
+   "bk" '(kill-buffer :which-key "kill buffer"))) 
    
 (defun rune/evil-hook ()
   (dolist (mode '(custom-mode
@@ -197,5 +197,5 @@
   :custom
   (magit-display-buffer-function #'magit-display-buffer-same-window-except-diff-v1))
 
-  
-			  
+(use-package forge
+  :after magit)
