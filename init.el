@@ -26,6 +26,8 @@
 (set-face-attribute 'fixed-pitch nil :font "Operator Mono Lig" :height 190 :weight 'bold)
 (set-face-attribute 'variable-pitch nil :font "Cantarell" :height 190 :weight 'normal)
 
+(toggle-frame-fullscreen)
+
 (global-set-key (kbd "<escape>") 'Keyboard-escape-quit)
 (use-package general
   :config
@@ -372,5 +374,3 @@
   delete-old-versions t  ; Automatically delete excess backups
   kept-new-versions 20   ; how many of the newest versions to keep
   kept-old-versions 5)    ; and how many of the old)
-
-(toggle-frame-fullscreen)
